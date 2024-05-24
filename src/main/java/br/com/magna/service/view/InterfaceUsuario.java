@@ -18,16 +18,15 @@ public class InterfaceUsuario {
 	Jogo jogar = new Jogo();
 	DificuldadeDeJogo dificuldade = null;
 	
-	private Integer opcaoMenuInicial = 0;
-	private Integer opcaoTutorial = 0;
-	private Integer opcaoEscolhendoDificuldade = 0;
+	private static Integer opcoes = 0;
+
 
 	private void menuInicial() {
 
 		logger.info("Seja Bem-vindo ao Caça Palavras");
 		logger.info("===============================\n");
 
-		while (opcaoMenuInicial != 2) {
+		while (opcoes != 2) {
 
 			logger.info("Digite o número da opção Desejada\n");
 
@@ -35,11 +34,11 @@ public class InterfaceUsuario {
 			logger.info("2. Sair");
 
 			try {
-				opcaoMenuInicial = scan.nextInt();
+				opcoes = scan.nextInt();
 
-				if (opcaoMenuInicial == 1) {
+				if (opcoes == 1) {
 					break;
-				} else if (opcaoMenuInicial == 2) {
+				} else if (opcoes == 2) {
 					logger.info("\nAté mais!");
 					System.exit(0);
 				} else {
@@ -70,7 +69,7 @@ public class InterfaceUsuario {
 		logger.info("Digite a segunda coordenada: a7");
 		logger.info("\nEntão o Sistema irá verificar se tem uma palavra nessas coordenadas ou não.");
 
-		while (opcaoTutorial != 2) {
+		while (opcoes != 2) {
 
 			logger.info("Digite o número da opção Desejada\n");
 
@@ -78,11 +77,11 @@ public class InterfaceUsuario {
 			logger.info("2. Sair");
 
 			try {
-				opcaoTutorial = scan.nextInt();
+				opcoes = scan.nextInt();
 
-				if (opcaoTutorial == 1) {
+				if (opcoes == 1) {
 					break;
-				} else if (opcaoTutorial == 2) {
+				} else if (opcoes == 2) {
 					logger.info("\nAté mais!");
 					System.exit(0);
 				} else {
@@ -108,11 +107,11 @@ public class InterfaceUsuario {
 	    logger.info("3. Difícil");
 	    logger.info("4. Sair");
 
-	    while (opcaoEscolhendoDificuldade != 4) {
+	    while (opcoes != 4) {
 	        try {
-	            opcaoEscolhendoDificuldade = scan.nextInt();
+	            opcoes = scan.nextInt();
 
-	            switch (opcaoEscolhendoDificuldade) {
+	            switch (opcoes) {
 	                case 1:
 	                    logger.info("\nDificuldade Fácil: ");
 	                    dificuldade = DificuldadeDeJogo.FACIL;
@@ -130,7 +129,7 @@ public class InterfaceUsuario {
 
 	                case 4:
 	                    logger.info("\nAté mais!");
-	                    System.exit(opcaoEscolhendoDificuldade);
+	                    System.exit(opcoes);
 
 	                default:
 	                    logger.error("\nOpção digitada diferente das opções listadas.\n");
