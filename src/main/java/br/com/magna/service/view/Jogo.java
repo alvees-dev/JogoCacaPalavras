@@ -10,6 +10,7 @@ import br.com.magna.service.boardModel.Tabuleiro;
 import br.com.magna.service.boardModel.ValidaTabuleiro;
 import br.com.magna.service.gameModel.DificuldadeDeJogo;
 import br.com.magna.service.gameModel.Palavras;
+import jdk.internal.org.jline.utils.Log;
 
 public class Jogo {
 
@@ -24,27 +25,23 @@ public class Jogo {
 		Map<Integer, Map<Integer, Character>> matriz = Tabuleiro.criarMatriz(dificuldade.getTamanho());
 
 		String[] palavras = Palavras.getPalavras(dificuldade);
-
+				
 		Tabuleiro.colocarPalavras(matriz, palavras);
 		Tabuleiro.preencherEspacosVazios(matriz);
 		Tabuleiro.exibirMatriz(matriz);
 
-
-
 		while (palavras.length != 0) {
-			
-			logger.info("\nPalavras a serem encontradas:");
+								
+			logger.info("\nPalavras a serem encontradas:\n");
 			
 			for (String palavra : palavras) {
 				logger.info(palavra);
 			}
 			
-			logger.info("\nEncontre as palavras. Digite as coordenadas de início e fim (por exemplo: A1 A6): \n");
-
-			logger.info("Digite a primeira coordenada");
+			logger.info("\nDigite a primeira coordenada (por exemplo: A1): \n");
 			String inicioPalavra = scan.next().toUpperCase();
 			
-			logger.info("Digite a segunda coordenada");
+			logger.info("\nDigite a segunda coordenada (por exemplo: A6): \n");
 			String fimPalavra = scan.next().toUpperCase();
 
 			if (ValidaTabuleiro.validarCoordenadas(inicioPalavra) && ValidaTabuleiro.validarCoordenadas(fimPalavra)) {
@@ -52,7 +49,9 @@ public class Jogo {
 
 				if (palavraEncontrada != null) {
 
-					logger.info("\nPalavra encontrada: " + palavraEncontrada);
+					espacos();
+
+					logger.info("\nPalavra encontrada: " + palavraEncontrada + "\n");
 					
 					palavras = ValidaTabuleiro.palavrasEncontradas(palavras, palavraEncontrada);
 					ValidaTabuleiro.substituirPalavra(matriz, palavraEncontrada);
@@ -64,11 +63,33 @@ public class Jogo {
 						break;
 					}
 				} else {
-					logger.error("Palavra não encontrada.");
+					espacos();
+					
+					logger.error("Palavra não encontrada. \n");
+					
+					Tabuleiro.colocarPalavras(matriz, palavras);
+					Tabuleiro.preencherEspacosVazios(matriz);
+					Tabuleiro.exibirMatriz(matriz);
+					
 				}
 			} else {
-				logger.error("Coordenadas inválidas. Digite novamente.");
+				
+				espacos();
+				
+				logger.error("Coordenadas inválidas. Digite novamente.\n ");
+				
+				Tabuleiro.colocarPalavras(matriz, palavras);
+				Tabuleiro.preencherEspacosVazios(matriz);
+				Tabuleiro.exibirMatriz(matriz);
 			}
+			
+			
+		}
+	}
+	
+	public void espacos() {
+		for (int contador = 0; contador <= 20; contador++) {
+			logger.info("\n");
 		}
 	}
 }
